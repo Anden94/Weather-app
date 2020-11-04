@@ -4,11 +4,11 @@ const api = {
   }
   
   const searchbox = document.querySelector('.search-box');
-  searchbox.addEventListener('keypress', setQuery);
+  searchbox.addEventListener('keypress', setQuery); // on a keypress, run function "setQuery"
   
   function setQuery(evt) {
     if (evt.keyCode == 13) { // 13 is the "enter-key"
-      getResults(searchbox.value);
+      getResults(searchbox.value); // calling a function "getResults" with "searchbox.value" as parameter. "searchbox.value" is the city you typed in the search box
     }
   }
   
@@ -16,7 +16,7 @@ const api = {
     fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
       .then(weather => {
         return weather.json();
-      }).then(displayResults);
+      }).then(displayResults); // calling function "displayResults"
   }
   
   function displayResults (weather) {
