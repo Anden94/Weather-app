@@ -36,9 +36,9 @@ const api = {
     weather_el.innerText = weather.weather[0].main;
   
     let high = document.querySelector('.high');
-    high.innerText =("High " + `${Math.round(weather.main.temp_min)}°c`);
+    high.innerText =("High " + `${Math.round(weather.main.temp_max)}°c`);
     let low = document.querySelector('.low');
-    low.innerText =("Low " + `${Math.round(weather.main.temp_max)}°c`);
+    low.innerText =("Low " + `${Math.round(weather.main.temp_min)}°c`);
   }
   
   function dateBuilder (d) {
