@@ -12,8 +12,8 @@ let mainTemperature= "";
 let calcuclatedTemperature= "";
 let tempMax= "";
 let tempMin= "";
-let celsius = $("#celsius").hasClass("active");
-    let fahrenheit = $("#fahrenheit").hasClass("active");
+const celsius = $("#celsius").hasClass("active");
+    const fahrenheit = $("#fahrenheit").hasClass("active");
 
 
 
