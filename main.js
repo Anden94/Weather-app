@@ -3,11 +3,15 @@ let celsiusValue = document.querySelector('#celsius');
 let fahrenheitValue =document.querySelector('#fahrenheit');
 let degreeButtons = document.querySelector('.degree-value'); 
 let temp =document.querySelector('.current .temp');
+let weather_el=document.querySelector('.current .weather');
+let high= document.querySelector('.current .high');
+let low= document.querySelector('.current .low');
+let feels = document.querySelector('.current .feels');
 let city=document.querySelector('.location .city');
 let date=document.querySelector('.location .date');
-let high= document.querySelector('.high');
-let weather_el=document.querySelector('.current .weather');
-let low= document.querySelector('.low');
+
+
+
 let mainTemperature= "";
 let calcuclatedTemperature= "";
 let tempMax= "";
@@ -44,7 +48,7 @@ const api = {
      //When already have searched for a city before
       if(!celsius && !fahrenheit)  {        
         celsiusValue.classList.add('active');
-        console.log($('#celsius').hasClass('active'));
+        
       }
       //-----------------------------------------------      
       degreeButtons.style.display = "flex"; 
@@ -62,12 +66,12 @@ const api = {
   
   function displayResults (weather) {    
     
-    //console.log(weather);
+    console.log(weather);
     city.innerText = `${weather.name}, ${weather.sys.country}`; 
     mainTemperature = `${weather.main.temp}`;
     tempMax = `${weather.main.temp_max}`;
     tempMin = `${weather.main.temp_min}`;
-   
+    tempFeel = `${weather.main.feels_like}`;
     //Date
     let now = new Date();    
     date.innerText = dateBuilder(now);   
@@ -78,11 +82,15 @@ const api = {
       mainTemperature = `${Math.round(mainTemperature)}`;    
       temp.innerHTML = mainTemperature + `<span>°c</span>`;
       high.innerText =("High " + `${Math.round(tempMax )}°c`);    
-      low.innerText =("Low " + `${Math.round(weather.main.temp_min)}°c`);
+      low.innerText =("Low " + `${Math.round(tempMin)}°c`);
+      feels.innerText =("Feels like  " + `${Math.round(tempFeel)}°c`);
     }
     if(fahrenheit){      
       mainTemperature = `${Math.round(changeToFahrenheit(mainTemperature))}`; 
-      temp.innerHTML = mainTemperature + `<span>°F</span>`;       
+      temp.innerHTML = mainTemperature + `<span>°F</span>`;    
+      high.innerText =("High " + `${Math.round(changeToFahrenheit(tempMax ))}°F`);    
+      low.innerText =("Low " + `${Math.round(changeToFahrenheit(tempMin))}°F`);
+      feels.innerText =("Feels like  " + `${Math.round(changeToFahrenheit(tempFeel))}°F`);   
     }
       
     //console.log(weather.weather[1]);
@@ -114,6 +122,7 @@ const api = {
        temp.innerHTML = (`${mainTemperature}°c`)  ;
        high.innerText =("High " + `${Math.round(tempMax )}°c`);    
       low.innerText =("Low " + `${Math.round(tempMin)}°c`);
+      feels.innerText = ("Feels like " + `${Math.round(tempFeel)}°c`);
      }
      if(!fahrenheit){
        console.log("fahrenheit");
@@ -123,6 +132,7 @@ const api = {
        temp.innerHTML =  (`${mainTemperature}°F`)    ;
        high.innerText =("High " + `${Math.round(changeToFahrenheit(tempMax))}°F`);    
       low.innerText =("Low " + `${Math.round(changeToFahrenheit(tempMin))}°F`);
+      feels.innerText =("Feels like  " + `${Math.round(changeToFahrenheit(tempFeel))}°F`);
      }    
  });
 
