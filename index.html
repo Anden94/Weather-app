@@ -14,10 +14,6 @@
       <input type="text" autocomplete="off" class="search-box" placeholder="Search for a city..." />
     </header>
     <main>
-      <section class="location">
-        <div class="city">Search for a city!</div>
-        <div class="date"></div>
-      </section>          
       <div class="degree-value">
         <p id="celsius" class="#">°C</p>
         <label class="switch">
@@ -25,16 +21,24 @@
           <span class="slider round"></span>
         </label>
         <p id="fahrenheit" class="#">°F</p>
-      </div>          
-      <div class="current">
-        <div class="temp"></div>
+      </div>            
+      <div class="degree-icon">
+      <section class="location">
+        <div class="city"></div>
+        <div class="date"></div>        
+      </section>  
+      <canvas class="icon" width="128" height="128"></canvas>     
+    </div>     
+      <div class="current">        
+        <div class="temp"></div>                   
         <div class="weather"></div>
         <div class="feels"></div>
         <div class="high"></div>
         <div class="low"></div>
-      </div>
+      </div>      
     </main>
   </div>
+  <script src ="skycons.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="main.js"></script>
   

@@ -12,8 +12,8 @@ body {
   background-position: top center;
 }
 .app-wrap {
-  display: flex;
-  flex-direction: column;
+  /*display: flex;*/
+  /*flex-direction: column;*/
   min-height: 100vh;
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)); /*makes a slight dark tint on background image*/
 }
@@ -43,13 +43,20 @@ header input:focus {
 }
 
 main {
-  flex: 1 1 100%;
+  /*flex: 1 1 100%;*/
   padding: 25px 25px 50px;
-  display: flex;
-  flex-direction: column;
+  /*display: flex;*/
+  /*flex-direction: column;*/
   align-items: center;
   text-align: center;
 }
+
+.location .icon{
+  /*display:flex;*/
+
+}
+
+
 
 .location .city {
   color: #FFF;
@@ -65,9 +72,19 @@ main {
 
 .degree-value{
   display: flex;   
+  justify-content: center;
   align-items: center;
 }
 
+.degree-icon{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.degree-icon .location, .icon{
+  margin: auto 20px;
+}
 .degree-value p{
   margin: 0 20px;
   color: #FFF;
@@ -150,8 +167,7 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-
-.current .temp {
+.temp {  
   color: #FFF;
   font-size: 102px;
   font-weight: 900;

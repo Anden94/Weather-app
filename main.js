@@ -9,24 +9,19 @@ let low= document.querySelector('.current .low');
 let feels = document.querySelector('.current .feels');
 let city=document.querySelector('.location .city');
 let date=document.querySelector('.location .date');
-
-
-
-let mainTemperature= "";
-let calcuclatedTemperature= "";
-let tempMax= "";
-let tempMin= "";
+// let icon =document.querySelector('.icon');
 const celsius = $("#celsius").hasClass("active");
-    const fahrenheit = $("#fahrenheit").hasClass("active");
-
-
-
-
-
-
-degreeButtons.style.display = "none";
+const fahrenheit = $("#fahrenheit").hasClass("active");
 const degree_button = document.querySelector('.slider');  
 const searchbox = document.querySelector('.search-box');
+degreeButtons.style.display = "none";
+
+let mainTemperature= "";
+let tempMax= "";
+let tempMin= "";
+let weatherIcon ="";
+let tempFeel="";
+
 
 const api = {
     key: "f34eae90a5113e73c6a1bbc49c5d8f89",
@@ -42,7 +37,8 @@ const api = {
   
   function setQuery(evt) {
     const celsius = $("#celsius").hasClass("active");
-    const fahrenheit = $("#fahrenheit").hasClass("active");
+const fahrenheit = $("#fahrenheit").hasClass("active");
+    
     
     if (evt.keyCode == 13) { // 13 is the "enter-key"      
      //When already have searched for a city before
@@ -59,12 +55,14 @@ const api = {
   
   function getResults (query) {
     fetch(`${api.base}weather?q=${query}&units=${api.unit}&APPID=${api.key}`)
-      .then(weather => { //function(weather) 
-        return weather.json();
+      .then(weather => { //function(weather) //.then("this can be anything, it contains the data")
+        return weather.json(); //converts to json, easily used in javascript
       }).then(displayResults); // calling function "displayResults"
   } 
   
-  function displayResults (weather) {    
+  function displayResults (weather) {   
+    const celsius = $("#celsius").hasClass("active");
+const fahrenheit = $("#fahrenheit").hasClass("active"); 
     
     console.log(weather);
     city.innerText = `${weather.name}, ${weather.sys.country}`; 
@@ -72,11 +70,17 @@ const api = {
     tempMax = `${weather.main.temp_max}`;
     tempMin = `${weather.main.temp_min}`;
     tempFeel = `${weather.main.feels_like}`;
+    weather_el.innerText = weather.weather[0].main;   
+    weatherIcon = weather.weather[0].description;
+    console.log(weatherIcon);
     //Date
     let now = new Date();    
     date.innerText = dateBuilder(now);   
-    const celsius = $("#celsius").hasClass("active");
-    const fahrenheit = $("#fahrenheit").hasClass("active");
+    
+    
+
+    //set Icon
+    setIcons(weatherIcon, document.querySelector(".icon"));
 
     if(celsius){
       mainTemperature = `${Math.round(mainTemperature)}`;    
@@ -92,9 +96,10 @@ const api = {
       low.innerText =("Low " + `${Math.round(changeToFahrenheit(tempMin))}°F`);
       feels.innerText =("Feels like  " + `${Math.round(changeToFahrenheit(tempFeel))}°F`);   
     }
+    
       
     //console.log(weather.weather[1]);
-    weather_el.innerText = weather.weather[0].main;   
+    
     
   }
   
@@ -112,6 +117,7 @@ const api = {
    degree_button.addEventListener('click', () => {
     const celsius = $("#celsius").hasClass("active");
     const fahrenheit = $("#fahrenheit").hasClass("active");
+    
     
      
      if(!celsius){
@@ -153,6 +159,38 @@ const api = {
     console.log(message);
     return fToCel;
 } 
+
+function setIcons(weatherIcon, iconID){
+  var skycons = new Skycons({"color": "white"});
+  //skycons.add(iconID, Skycons.PARTLY_CLOUDY_DAY);   
+  if(weatherIcon.indexOf("rain") >= 0) {
+		skycons.set(iconID, Skycons.RAIN);
+	}
+
+	else if (weatherIcon.indexOf("sunny") >= 0) {
+		skycons.set(iconID, Skycons.CLEAR_DAY);
+	}
+
+	else if (weatherIcon.indexOf("clear") >= 0) {		
+			skycons.set(iconID, Skycons.CLEAR_DAY);		
+	}
+
+	else if (weatherIcon.indexOf("cloud") >= 0) {		
+			skycons.set(iconID, Skycons.PARTLY_CLOUDY_DAY);	
+	}
+
+	else if (weatherIcon.indexOf("thunderstorm") >= 0) {
+		skycons.set(iconID, Skycons.SLEET);
+	}
+
+	else if (weatherIcon.indexOf("snow") >= 0) {
+		skycons.set(iconID, Skycons.SNOW);
+	}  
+   
+   return skycons.play();
+   
+
+ }
 
   
 
